@@ -1,0 +1,51 @@
+{
+    "name": "fogles2/hostview",
+    "description": "PHP Hosting Billing Dashboard with FOSSBilling and Plesk Integration",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Michael McDaniel",
+            "email": "admin@turnpage.io"
+        }
+    ],
+    "require": {
+        "php": ">=8.2",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-pdo": "*",
+        "ext-pdo_mysql": "*",
+        "ext-openssl": "*",
+        "ext-mbstring": "*",
+        "guzzlehttp/guzzle": "^7.0",
+        "symfony/dotenv": "^6.0",
+        "monolog/monolog": "^3.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.0",
+        "phpstan/phpstan": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "HostView\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "HostView\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
+    "scripts": {
+        "test": "phpunit",
+        "phpstan": "phpstan analyse",
+        "post-autoload-dump": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "@php -r \"is_dir('storage/logs') || mkdir('storage/logs', 0777, true);\"",
+            "@php -r \"is_dir('storage/cache') || mkdir('storage/cache', 0777, true);\""
+        ]
+    }
+}
